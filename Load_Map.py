@@ -1,14 +1,15 @@
 from World import World
 from State import State
+import collections
 
 def load(file):
     file_object = open(file, 'r')
     stage = 0
-    list_states = {}
+    list_states = collections.OrderedDict()
     counter = 0
     actions = 0
     probabilities = []
-    movements = {}
+    movements = collections.OrderedDict()
     terminal = []
     gamma = 0
     start = ""

@@ -1,25 +1,35 @@
 import Load_Map
+import pandas as pd
+import collections
 from State import State
 
 
 def main():
-    file = "Maps//tunnel_a2_g10_r1.txt"
+    file = "Maps//random_4.txt"
     world = Load_Map.load(file)
     print(world.states['b4'])
     e = 10**(-5)
     utilities, directions = value_iteration(world, e)
-    print(utilities, directions)
+    create_csv(file, utilities, directions)
 
 
 def create_csv(file, utilities, directions):
     filename = file[:len(file)-4]
-    filename += "_result.txt"
+    filename += "_result.csv"
+    data = []
+
+    for status in utilities:
+        tople = [status, utilities[status], directions[status]]
+        data.append(tople)
+
+    df = pd.DataFrame(data, columns=['state', 'Utility', 'Policy'])
+    df.to_csv(filename, index=False)
 
 
 
 def value_iteration(world, e):
-    U = {}
-    U_prime = {}
+    U = collections.OrderedDict()
+    U_prime = collections.OrderedDict()
     maximum_change = 0
     policy_dict = {}
 
