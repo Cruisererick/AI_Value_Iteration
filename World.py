@@ -10,6 +10,7 @@ class World:
         self.start = start
         self.probs_dict = {}
         self.define_probabilities()
+        self.terminal_utilities()
 
     def move(self, state, action):
         return self.movement[state + action]
@@ -22,6 +23,10 @@ class World:
             self.probs_dict['E' + '|' + action] = aux[2]
             self.probs_dict['S' + '|' + action] = aux[3]
             self.probs_dict['W' + '|' + action] = aux[4]
+
+    def terminal_utilities(self):
+        for terminals in self.terminal_states:
+            self.states[terminals].utility = self.states[terminals].reward
 
 
 
