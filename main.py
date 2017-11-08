@@ -11,6 +11,12 @@ def main():
     print(utilities, directions)
 
 
+def create_csv(file, utilities, directions):
+    filename = file[:len(file)-4]
+    filename += "_result.txt"
+
+
+
 def value_iteration(world, e):
     U = {}
     U_prime = {}
